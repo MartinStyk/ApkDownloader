@@ -1,4 +1,4 @@
-package sk.styk.martin.bakalarka.playdrone;
+package sk.styk.martin.bakalarka.linkfinders;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class PlaydroneLinkFinder implements ApkLinkFinder {
     private static final Logger logger = LoggerFactory.getLogger(PlaydroneLinkFinder.class);
     private final String DEFAULT_METADATA_URL = "https://archive.org/download/playdrone-snapshots/2014-10-31.json";
     private File metadataFile;
-    private int numberOfApks=5000;
+    private int numberOfApks;
 
     @Override
     public List<String> findLinks() {
@@ -34,7 +34,10 @@ public class PlaydroneLinkFinder implements ApkLinkFinder {
 
     @Override
     public void setMetadataFile(File metadataFile) {
-        if (metadataFile == null || !metadataFile.isFile()) {
+        if(metadataFile == null){
+            return;
+        }
+        if ( !metadataFile.isFile()) {
             throw new IllegalArgumentException("metadata file not valid");
         }
         this.metadataFile = metadataFile;

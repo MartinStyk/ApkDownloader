@@ -6,9 +6,9 @@
 package sk.styk.martin.bakalarka.common;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.List;
-import sk.styk.martin.bakalarka.playdrone.PlaydroneLinkFinder;
+
+import sk.styk.martin.bakalarka.linkfinders.AndroidApksFreeLinkFinder;
 
 /**
  *
@@ -17,13 +17,17 @@ import sk.styk.martin.bakalarka.playdrone.PlaydroneLinkFinder;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        ApkLinkFinder finder = new PlaydroneLinkFinder();
-        finder.setNumberOfApks(3);
-        finder.setMetadataFile(new File("D:\\Projects\\PlaydroneApkDownloader\\2014-10-31.json"));
+        Arguments arguments = ArgumentUtils.parseArguments(args);
+
+        ApkLinkFinder finder = arguments.getLinkFinder();
+        finder.setMetadataFile(arguments.getMetadataFile());
+        finder.setNumberOfApks(arguments.getNumberOfApks());
         List<String> urls = finder.findLinks();
 
         ApkDownloader downloader = new ApkDownloader();
-        downloader.setDownloadDirectory(new File("D:\\APK_test"));
+        downloader.setDownloadDirectory(arguments.getDownloadDirectory());
+        downloader.setNumberOfThreads(arguments.getNumberOfThreads());
+        downloader.setOverwriteExisting(arguments.isOverwriteExisting());
         downloader.download(urls);
     }
 }

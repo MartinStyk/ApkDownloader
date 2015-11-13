@@ -13,11 +13,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author Martin Styk
  */
 public class ApkDownloader {
@@ -87,8 +87,8 @@ public class ApkDownloader {
         return downloadDirectory;
     }
 
-    public void overwriteExistingFiles() {
-        overwriteExisting = true;
+    public void setOverwriteExisting(boolean overwriteExisting) {
+        this.overwriteExisting = overwriteExisting;
     }
 
     public boolean getOverwriteExistingFiles() {
@@ -103,9 +103,9 @@ public class ApkDownloader {
         return numberOfThreads;
     }
 
-    public void setNumberOfThreads() {
+    public void setNumberOfThreads(int numberOfThreads) {
         this.numberOfThreads = numberOfThreads;
     }
 
-    
+
 }

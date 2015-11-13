@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.styk.martin.bakalarka.androidapksfree;
+package sk.styk.martin.bakalarka.linkfinders;
 
 import sk.styk.martin.bakalarka.common.ApkLinkFinder;
 
@@ -29,7 +29,7 @@ public class AndroidApksFreeLinkFinder implements ApkLinkFinder {
     private static final String DOWNLOAD_LINK_TEXT = "Download APK from secure server >>";
     private static final String DOWNLOAD_LINK_TEXT_1 = "Download APK from secure source >>";
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(AndroidApksFreeLinkFinder.class);
-    private int numberOfApks = 5000;
+    private int numberOfApks;
     private int currentNumberOfApks;
 
     private List<String> treasure = new LinkedList<>();
@@ -49,7 +49,8 @@ public class AndroidApksFreeLinkFinder implements ApkLinkFinder {
 
     @Override
     public void setMetadataFile(File metadataFile) {
-        throw new UnsupportedOperationException("not supported for this link finder");
+        if (metadataFile != null)
+            throw new UnsupportedOperationException("not supported for this link finder");
     }
 
     @Override
