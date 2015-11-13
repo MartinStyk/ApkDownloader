@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sk.styk.martin.bakalarka.linkfinders;
 
 import java.io.*;
@@ -26,6 +21,8 @@ public class CrackApkLinkFinder implements ApkLinkFinder {
 
     static {
         PAGES_TO_PROCESS.add("http://www.crackapk.com/top-crack");
+        PAGES_TO_PROCESS.add("http://www.crackapk.com/crack-apps");
+        PAGES_TO_PROCESS.add("http://www.crackapk.com/crack-games");
     }
 
     private List<String> treasure = new LinkedList<>();
