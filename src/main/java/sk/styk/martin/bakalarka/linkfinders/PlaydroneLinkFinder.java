@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParser;
@@ -11,11 +12,10 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sk.styk.martin.bakalarka.downloaders.ApkDownloader;
-import sk.styk.martin.bakalarka.downloaders.DownloadTask;
+
+import static java.lang.System.exit;
 
 /**
- *
  * @author Martin Styk
  */
 public class PlaydroneLinkFinder implements ApkLinkFinder {
@@ -33,10 +33,10 @@ public class PlaydroneLinkFinder implements ApkLinkFinder {
 
     @Override
     public void setMetadataFile(File metadataFile) {
-        if(metadataFile == null){
+        if (metadataFile == null) {
             return;
         }
-        if ( !metadataFile.isFile()) {
+        if (!metadataFile.isFile()) {
             throw new IllegalArgumentException("metadata file not valid");
         }
         this.metadataFile = metadataFile;
@@ -51,22 +51,23 @@ public class PlaydroneLinkFinder implements ApkLinkFinder {
         if (metadataFile != null) {
             return;
         }
-        logger.info("metadataFile not found, starting download(707MB)");
-
-        ApkDownloader downloader = new ApkDownloader() ;
-        metadataFile = downloader.getDownloadFile(DEFAULT_METADATA_URL);
-
-        logger.info("new metadata file :" + metadataFile.getAbsolutePath());
-
-        Thread t = new Thread(new DownloadTask(DEFAULT_METADATA_URL, metadataFile));
-
-        t.start();
-        try {
-            t.join();
-        } catch (InterruptedException e) {
-            logger.warn("Interrupted exception while downloading url file");
-        }
-
+        logger.info("metadata not found. downloading metadata by ApkDownloader is not supported. Go to " + DEFAULT_METADATA_URL + "download file and set it using -m or --metadata-file cli parameter.");
+        exit(1);
+//        logger.info("metadataFile not found, starting download(707MB)");
+//
+//       ApkDownloader downloader = new ApkDownloader() ;
+//        metadataFile = downloader.getDownloadFile(DEFAULT_METADATA_URL);
+//
+//        logger.info("new metadata file :" + metadataFile.getAbsolutePath());
+//
+//        Thread t = new Thread(new DownloadTask(DEFAULT_METADATA_URL, metadataFile));
+//
+//        t.start();
+//        try {
+//            t.join();
+//        } catch (InterruptedException e) {
+//            logger.warn("Interrupted exception while downloading url file");
+//        }
     }
 
     private List<String> parseJSON(File source, int numberOfApks) {
