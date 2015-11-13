@@ -5,13 +5,9 @@
  */
 package sk.styk.martin.bakalarka.common;
 
-import java.io.File;
 import java.util.List;
-
 import sk.styk.martin.bakalarka.downloaders.ApkDownloader;
-import sk.styk.martin.bakalarka.downloaders.CrackApkDownloader;
 import sk.styk.martin.bakalarka.linkfinders.ApkLinkFinder;
-import sk.styk.martin.bakalarka.linkfinders.CrackApkLinkFinder;
 
 /**
  *

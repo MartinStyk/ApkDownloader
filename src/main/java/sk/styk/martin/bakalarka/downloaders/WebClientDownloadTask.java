@@ -54,6 +54,7 @@ public class WebClientDownloadTask implements Runnable {
                     os.close();
                     is.close();
                 } catch (IOException ex) {
+                    logger.error(ex.toString());
                     // Exception handling
                 }
             } catch (IOException ex) {
