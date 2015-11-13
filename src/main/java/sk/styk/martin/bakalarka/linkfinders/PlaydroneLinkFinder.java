@@ -11,9 +11,8 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sk.styk.martin.bakalarka.common.ApkDownloader;
-import sk.styk.martin.bakalarka.common.ApkLinkFinder;
-import sk.styk.martin.bakalarka.common.DownloadTask;
+import sk.styk.martin.bakalarka.downloaders.ApkDownloader;
+import sk.styk.martin.bakalarka.downloaders.DownloadTask;
 
 /**
  *

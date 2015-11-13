@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.styk.martin.bakalarka.common;
+package sk.styk.martin.bakalarka.downloaders;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -39,6 +41,15 @@ public class ApkDownloader {
                 logger.warn("File already exists for url : " + url);
             } else {
                 pool.submit(new DownloadTask(url, downloadFile));
+                try {
+                    pool.submit((Runnable)getDownloadThreadClass().newInstance(url,downloadFile));
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
         }
         pool.shutdown();
@@ -46,7 +57,7 @@ public class ApkDownloader {
     }
 
     public File getDownloadFile(String url) {
-        String REGEX = ".*/(.*.apk)";
+        String REGEX = getNameRegex();
         Pattern p = Pattern.compile(REGEX);
         Matcher matcher = p.matcher(url);
         String name;
@@ -56,6 +67,10 @@ public class ApkDownloader {
         } else {
             name = UUID.randomUUID().toString();
             getLogger().warn("URL " + url + " cannot be matched to extract APK name. Following name will be used : " + name);
+        }
+
+        if(!name.endsWith(".apk") || !name.endsWith(".APK")){
+            name = name + ".apk";
         }
 
         File fileToReturn;
@@ -105,6 +120,24 @@ public class ApkDownloader {
 
     public void setNumberOfThreads(int numberOfThreads) {
         this.numberOfThreads = numberOfThreads;
+    }
+
+    protected String getNameRegex(){
+        return ".*/(.*.apk)";
+    }
+    protected Constructor getDownloadThreadClass(){
+        Class classToLoad = DownloadTask.class;
+
+        Class[] cArg = new Class[2]; //Our constructor has 2 arguments
+        cArg[0] = String.class;
+        cArg[1] = File.class;
+
+        try {
+           return classToLoad.getDeclaredConstructor(cArg);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

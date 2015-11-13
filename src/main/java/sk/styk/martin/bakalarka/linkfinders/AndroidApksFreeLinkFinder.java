@@ -5,12 +5,9 @@
  */
 package sk.styk.martin.bakalarka.linkfinders;
 
-import sk.styk.martin.bakalarka.common.ApkLinkFinder;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +29,7 @@ public class AndroidApksFreeLinkFinder implements ApkLinkFinder {
     private int numberOfApks;
     private int currentNumberOfApks;
 
-    private List<String> treasure = new LinkedList<>();
+    private Set<String> treasure = new HashSet<>();
 
     @Override
     public List<String> findLinks() {
@@ -44,7 +41,7 @@ public class AndroidApksFreeLinkFinder implements ApkLinkFinder {
             processListPage(APPS_PAGE + i + "/");
         }
         logger.info("number of links found on pages " + treasure.size());
-        return treasure;
+        return new ArrayList<>(treasure);
     }
 
     @Override
