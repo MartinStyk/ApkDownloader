@@ -40,7 +40,6 @@ public class ApkDownloader {
             if (downloadFile == null) {
                 logger.warn("File already exists for url : " + url);
             } else {
-                pool.submit(new DownloadTask(url, downloadFile));
                 try {
                     pool.submit((Runnable)getDownloadThreadClass().newInstance(url,downloadFile));
                 } catch (InstantiationException e) {

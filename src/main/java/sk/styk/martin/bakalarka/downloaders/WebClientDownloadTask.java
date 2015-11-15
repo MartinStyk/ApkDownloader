@@ -40,7 +40,11 @@ public class WebClientDownloadTask implements Runnable {
         } catch (MalformedURLException e) {
             logger.error("Malformed URL : " + urlString);
         }
-        try (final WebClient webClient = new WebClient()) {
+        WebClient webClient = null;
+        try {
+            webClient  = new WebClient();
+            webClient.setThrowExceptionOnFailingStatusCode(false);
+            webClient.setThrowExceptionOnScriptError(false);
             final HtmlPage page = webClient.getPage(url);
             try {
                 InputStream is = page.getWebResponse().getContentAsStream();
@@ -57,7 +61,7 @@ public class WebClientDownloadTask implements Runnable {
                     logger.error(ex.toString());
                     // Exception handling
                 }
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 // Exception handling
             }
 
@@ -65,6 +69,9 @@ public class WebClientDownloadTask implements Runnable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if(webClient!=null)
+                webClient.closeAllWindows();
         }
 
         logger.info("Finished download from " + urlString);
