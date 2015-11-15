@@ -1,26 +1,27 @@
 package sk.styk.martin.bakalarka.linkfinders;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * @author Martin Styk
+ * Created by Martin Styk on 15.11.2015.
  */
-public class ApkManiaFullLinkFinder implements ApkLinkFinder {
+public abstract class ApkManiaFullLinkFinderBase implements ApkLinkFinder {
 
     private static final String APPS_PAGE = "http://apkmaniafull.com/category/android-apps/page/";
     private static final int NUMBER_OF_PAGES = 417;
-    private static final String DOWNLOAD_LINK_TEXT = "Download APK from secure server >>";
-    private static final String DOWNLOAD_LINK_TEXT_1 = "Download APK from secure source >>";
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(AndroidApksFreeLinkFinder.class);
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ApkManiaFullArchiveLinkFinder.class);
     private int numberOfApks;
 
     private Set<String> treasure = new HashSet<>();
@@ -73,7 +74,7 @@ public class ApkManiaFullLinkFinder implements ApkLinkFinder {
         try {
             document = Jsoup.connect(url).get();
         } catch (IOException ex) {
-            Logger.getLogger(AndroidApksFreeLinkFinder.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(ex.toString());
             return;
         }
         List<Element> redirectLinks = document.getElementsByAttributeValue("target", "_blank");
@@ -81,9 +82,15 @@ public class ApkManiaFullLinkFinder implements ApkLinkFinder {
             String href = link.attr("href");
             if (href.contains("http://apkmaniafull.com/redirect.php?url=")) {
                 String toAdd = href.substring(href.indexOf('=') + 1);
-                treasure.add(toAdd);
+                String toAdd1 = handleLink(url);
+
+                if (toAdd1 != null) {
+                    treasure.add(toAdd1);
+                }
                 break;
             }
         }
     }
+
+    protected abstract String handleLink(String url);
 }
