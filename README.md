@@ -7,6 +7,7 @@ Utility for downloading .apk files
 * [Playdrone Apks](https://archive.org/details/playdrone-apks) (Apks downloaded from play store by project PlayDrone)
 * [AndroidApksFree.com](http://www.androidapksfree.com)
 * [CrackApk.com](http://www.crackapk.com/)
+* [ApkManiaFull.com](http://www.crackapk.com/) (ApkManiaFullVK, ApkManiaFullArchive)
 
 ###Usage
 Download file jar/ApkDownloader-1.0-SNAPSHOT-jar-with-dependencies.jar
