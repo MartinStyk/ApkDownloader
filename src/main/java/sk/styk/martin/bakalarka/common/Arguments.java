@@ -4,10 +4,10 @@ import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.styk.martin.bakalarka.downloaders.ApkDownloader;
+import sk.styk.martin.bakalarka.downloaders.ApkManiaFullArchiveDownloader;
+import sk.styk.martin.bakalarka.downloaders.ApkManiaFullVKDownloader;
 import sk.styk.martin.bakalarka.downloaders.CrackApkDownloader;
-import sk.styk.martin.bakalarka.linkfinders.ApkLinkFinder;
-import sk.styk.martin.bakalarka.linkfinders.CrackApkLinkFinder;
-import sk.styk.martin.bakalarka.linkfinders.PlaydroneLinkFinder;
+import sk.styk.martin.bakalarka.linkfinders.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -106,12 +106,18 @@ public class Arguments {
     }
 
     public ApkDownloader getApkDownloader() {
-        String linkFinderClazzName = linkFinderClass == null ? DEFAULT_LINK_FINDER_CLASS.getCanonicalName() : linkFinderClass.getCanonicalName();
+        Class linkFinderClazz = linkFinderClass == null ? DEFAULT_LINK_FINDER_CLASS : linkFinderClass;
         Class clazz = DEFAULT_DOWNLOADER_CLASS;
-        if (linkFinderClazzName.equals(CrackApkLinkFinder.class.getCanonicalName())) {
+
+        if (linkFinderClazz.equals(CrackApkLinkFinder.class)) {
             clazz = CrackApkDownloader.class;
+        } else if (linkFinderClazz.equals(ApkManiaFullVKLinkFinder.class)) {
+            clazz = ApkManiaFullVKDownloader.class;
+        } else if (linkFinderClazz.equals(ApkManiaFullArchiveLinkFinder.class)) {
+            clazz = ApkManiaFullArchiveDownloader.class;
         }
-        try{
+
+        try {
             return ApkDownloader.class.cast(clazz.newInstance());
         } catch (InstantiationException e) {
             logger.error(e.toString());
@@ -137,7 +143,7 @@ public class Arguments {
         options.addOption(Option
                 .builder("l")
                 .longOpt("location")
-                .desc("Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, CrackApk")
+                .desc("Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, CrackApk, ApkManiaFullVK, ApkManiaFullArchive")
                 .hasArg()
                 .numberOfArgs(1)
                 .build()
@@ -229,6 +235,8 @@ public class Arguments {
         loc.add("AndroidApksFree");
         loc.add("Playdrone");
         loc.add("CrackApk");
+        loc.add("ApkManiaFullVK");
+        loc.add("ApkManiaFullArchive");
         return loc;
     }
 

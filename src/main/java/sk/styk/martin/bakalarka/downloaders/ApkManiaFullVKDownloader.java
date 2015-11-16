@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Martin Styk on 13.11.2015.
  */
-public class AppManiaFullVKDownloader extends ApkDownloader {
+public class ApkManiaFullVKDownloader extends ApkDownloader {
 
     @Override
     protected String getNameRegex(){

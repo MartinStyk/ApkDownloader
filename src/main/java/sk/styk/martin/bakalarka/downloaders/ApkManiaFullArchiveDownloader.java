@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Martin Styk on 13.11.2015.
  */
-public class AppManiaFullArchiveDownloader extends ApkDownloader {
+public class ApkManiaFullArchiveDownloader extends ApkDownloader {
 
     @Override
     protected String getNameRegex(){
