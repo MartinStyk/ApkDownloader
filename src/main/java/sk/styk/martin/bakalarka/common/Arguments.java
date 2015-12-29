@@ -3,10 +3,7 @@ package sk.styk.martin.bakalarka.common;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sk.styk.martin.bakalarka.downloaders.ApkDownloader;
-import sk.styk.martin.bakalarka.downloaders.ApkManiaFullArchiveDownloader;
-import sk.styk.martin.bakalarka.downloaders.ApkManiaFullVKDownloader;
-import sk.styk.martin.bakalarka.downloaders.CrackApkDownloader;
+import sk.styk.martin.bakalarka.downloaders.*;
 import sk.styk.martin.bakalarka.linkfinders.*;
 
 import java.io.File;
@@ -115,6 +112,8 @@ public class Arguments {
             clazz = ApkManiaFullVKDownloader.class;
         } else if (linkFinderClazz.equals(ApkManiaFullArchiveLinkFinder.class)) {
             clazz = ApkManiaFullArchiveDownloader.class;
+        } else if (linkFinderClazz.equals(AppsApkLinkFinder.class)) {
+            clazz = AppsApkDownloader.class;
         }
 
         try {
@@ -143,7 +142,7 @@ public class Arguments {
         options.addOption(Option
                 .builder("l")
                 .longOpt("location")
-                .desc("Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, CrackApk, ApkManiaFullVK, ApkManiaFullArchive")
+                .desc("Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, CrackApk, ApkManiaFullVK, ApkManiaFullArchive, AppsApk")
                 .hasArg()
                 .numberOfArgs(1)
                 .build()
