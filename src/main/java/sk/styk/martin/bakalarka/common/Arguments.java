@@ -100,7 +100,7 @@ public class Arguments {
                 exit(1);
             }
         } else {
-            logger.warn(linkFinderClassString + "not found, using default : " + DEFAULT_LINK_FINDER_CLASS);
+            logger.warn(linkFinderClassString + " not found, using default : " + DEFAULT_LINK_FINDER_CLASS);
         }
 
     }
@@ -237,6 +237,7 @@ public class Arguments {
         loc.add("CrackApk");
         loc.add("ApkManiaFullVK");
         loc.add("ApkManiaFullArchive");
+        loc.add("AppsApk");
         return loc;
     }
 
