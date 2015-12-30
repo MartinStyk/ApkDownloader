@@ -47,7 +47,8 @@ public class DownloadTask implements Runnable {
         try {
             FileUtils.copyURLToFile(url, file);
         } catch (IOException e) {
-            logger.error("File can not be downloaded " + urlString);
+            file.delete();
+            logger.error("File can not be downloaded " + urlString + "\n" + e.toString());
         }
 
         logger.info("Finished download from " + urlString);
