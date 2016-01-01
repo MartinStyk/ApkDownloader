@@ -24,7 +24,7 @@ public class Arguments {
     private static final int DEFAULT_NUMBER_OF_APKS = 1500;
     private static final File DEFAULT_DOWNLOAD_DIRECTORY = new File("D:\\APK_test");
     private static final boolean DEFAULT_OVERWRITE_EXISTING = false;
-    private static final int DEFAULT_NUMBER_OF_THREADS = 10;
+    private static final int DEFAULT_NUMBER_OF_THREADS = Runtime.getRuntime().availableProcessors();
 
     private Class linkFinderClass;
     private Integer numberOfApks;
