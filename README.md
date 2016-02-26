@@ -6,7 +6,6 @@ Utility for downloading .apk files. Originally created as a part of BAchelor`s t
 
 * [Playdrone Apks](https://archive.org/details/playdrone-apks) (Apks downloaded from play store by project PlayDrone)
 * [AndroidApksFree.com](http://www.androidapksfree.com)
-* [CrackApk.com](http://www.crackapk.com/)
 * [ApkManiaFull.com](http://www.crackapk.com/) (ApkManiaFullVK, ApkManiaFullArchive)
 * [AppsApk.com](http://www.appsapk.com/) 
 
@@ -19,7 +18,7 @@ From the directory with this jar file execute ApkDownloader with following comma
 
 Short  | Long | Required | Default |Info
 ------------- | ------------- | -------------  | ------------- | -------------
--l            | --location    | no | Playdrone| Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, CrackApk.
+-l            | --location    | no | Playdrone| Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, ApkManiaFullVK, ApkManiaFullArchive, AppsApk.
 -n            | --number-of-apks  |  no | 1500 |Maximum number of apk files searched.
 -m            | --metadata-file  |  no | - |Path to metadata file. Only supported for PlaydroneApk link finder.
 -o            | --overwrite-existing  |  no | false |Overwrite already downloaded files. (set only -o or -override-existing)
