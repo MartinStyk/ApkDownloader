@@ -106,9 +106,7 @@ public class Arguments {
         Class linkFinderClazz = linkFinderClass == null ? DEFAULT_LINK_FINDER_CLASS : linkFinderClass;
         Class clazz = DEFAULT_DOWNLOADER_CLASS;
 
-        if (linkFinderClazz.equals(CrackApkLinkFinder.class)) {
-            clazz = CrackApkDownloader.class;
-        } else if (linkFinderClazz.equals(ApkManiaFullVKLinkFinder.class)) {
+        if (linkFinderClazz.equals(ApkManiaFullVKLinkFinder.class)) {
             clazz = ApkManiaFullVKDownloader.class;
         } else if (linkFinderClazz.equals(ApkManiaFullArchiveLinkFinder.class)) {
             clazz = ApkManiaFullArchiveDownloader.class;
@@ -142,7 +140,7 @@ public class Arguments {
         options.addOption(Option
                 .builder("l")
                 .longOpt("location")
-                .desc("Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, CrackApk, ApkManiaFullVK, ApkManiaFullArchive, AppsApk")
+                .desc("Specifies location from which apks will be downloaded. Supported values : Playdrone, AndroidApksFree, ApkManiaFullVK, ApkManiaFullArchive, AppsApk")
                 .hasArg()
                 .numberOfArgs(1)
                 .build()
@@ -233,7 +231,6 @@ public class Arguments {
         List<String> loc = new ArrayList<String>();
         loc.add("AndroidApksFree");
         loc.add("Playdrone");
-        loc.add("CrackApk");
         loc.add("ApkManiaFullVK");
         loc.add("ApkManiaFullArchive");
         loc.add("AppsApk");
