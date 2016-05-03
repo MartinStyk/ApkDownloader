@@ -14,9 +14,20 @@ import java.util.List;
  */
 public interface ApkLinkFinder {
 
-    public List<String> findLinks();
+    /**
+     * Finds links to APK files
+     * @return List of URLs to APK files
+     */
+    List<String> findLinks();
 
-    public void setMetadataFile(File metadataFile);
+    /**
+     * Sets metadata file. Only used with Playdron
+     * @param metadataFile metadata file containing links to APKs
+     */
+    void setMetadataFile(File metadataFile);
 
-    public void setNumberOfApks(int numberOfApks);
+    /**
+     * @param numberOfApks number of APKs we want to download
+     */
+    void setNumberOfApks(int numberOfApks);
 }

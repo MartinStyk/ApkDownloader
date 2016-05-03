@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Download task for one file. Can e executed concurrently
  *
  * @author Martin Styk
  */
