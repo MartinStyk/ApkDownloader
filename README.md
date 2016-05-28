@@ -22,7 +22,7 @@ Short  | Long | Required | Default |Info
 -n            | --number-of-apks  |  no | 1500 |Maximum number of apk files searched.
 -m            | --metadata-file  |  no | - |Path to metadata file. Only supported for PlaydroneApk link finder.
 -o            | --overwrite-existing  |  no | false |Overwrite already downloaded files. (set only -o or -override-existing)
--d            | --download-directory  | yes | - |Path where apks will be downloaded. Directory must exist!
+-d            | --download-directory  | yes | - |Path where apks will be downloaded.
 -t            | --number-of-threads  | no | 10 |Number of concurrent downloads.  
 
 Example of command: <br/>java -jar ApkDownloader-1.0-SNAPSHOT-jar-with-dependencies.jar --location=CrackApk -n=100 --overwrite-existing --download-directory=D:\APK

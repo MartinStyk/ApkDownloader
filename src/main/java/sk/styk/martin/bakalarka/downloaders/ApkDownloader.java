@@ -107,8 +107,8 @@ public class ApkDownloader {
         if (downloadDirectory == null) {
             throw new IllegalArgumentException("Download directory should not be null");
         }
-        if (!downloadDirectory.isDirectory()) {
-            throw new IllegalArgumentException("Download directory is not a valid directory");
+        if (!downloadDirectory.exists() && !downloadDirectory.isDirectory()) {
+            downloadDirectory.mkdirs();
         }
         this.downloadDirectory = downloadDirectory;
     }
