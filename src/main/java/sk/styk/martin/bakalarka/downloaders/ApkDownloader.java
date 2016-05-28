@@ -20,6 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Base class for downloading APK files
+ *
  * @author Martin Styk
  */
 public class ApkDownloader {
@@ -30,6 +32,13 @@ public class ApkDownloader {
     private int numberOfThreads = 10;
 
 
+    /**
+     * Downloads files according to input parameter.
+     * This method uses Executor to submit @see DownloadTask
+     *
+     * @param urls urls to files to download.
+     * @throws InterruptedException
+     */
     public void download(List<String> urls) throws InterruptedException {
         ExecutorService pool = Executors.newFixedThreadPool(numberOfThreads);
 
@@ -55,6 +64,10 @@ public class ApkDownloader {
         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * @param url of file to download
+     * @return name of file stored
+     */
     public File getDownloadFile(String url) {
         String REGEX = getNameRegex();
         Pattern p = Pattern.compile(REGEX);
@@ -87,6 +100,9 @@ public class ApkDownloader {
         }
     }
 
+    /**
+     * @param downloadDirectory location of donwloaded files
+     */
     public void setDownloadDirectory(File downloadDirectory) {
         if (downloadDirectory == null) {
             throw new IllegalArgumentException("Download directory should not be null");
@@ -101,6 +117,9 @@ public class ApkDownloader {
         return downloadDirectory;
     }
 
+    /**
+     * @param overwriteExisting overwrite file if laready exists
+     */
     public void setOverwriteExisting(boolean overwriteExisting) {
         this.overwriteExisting = overwriteExisting;
     }
@@ -117,6 +136,9 @@ public class ApkDownloader {
         return numberOfThreads;
     }
 
+    /**
+     * @param numberOfThreads number of concurrent downloads
+     */
     public void setNumberOfThreads(int numberOfThreads) {
         this.numberOfThreads = numberOfThreads;
     }
@@ -124,6 +146,7 @@ public class ApkDownloader {
     protected String getNameRegex(){
         return ".*/(.*.apk)";
     }
+
     protected Constructor getDownloadThreadClass(){
         Class classToLoad = DownloadTask.class;
 

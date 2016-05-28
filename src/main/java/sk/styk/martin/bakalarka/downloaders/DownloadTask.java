@@ -13,7 +13,8 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
 /**
- * Download task for one file. Can e executed concurrently
+ * Download task for one file. Can e executed concurrently.
+ * Simply downloads content on specified URLs which should end with *.apk
  *
  * @author Martin Styk
  */

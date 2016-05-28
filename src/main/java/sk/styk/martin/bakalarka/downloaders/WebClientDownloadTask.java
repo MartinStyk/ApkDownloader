@@ -14,7 +14,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Download task runnable using webclient
+ * can be used when javascript is neccessary to download files from site
  * @author Martin Styk
  */
 public class WebClientDownloadTask implements Runnable {
